@@ -429,13 +429,163 @@
     letter-spacing: 2px; color: var(--muted);
   }
 
+  /* ── NUEVO: Resumen global ── */
+  .global-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    margin-bottom: 28px;
+  }
+  .gs-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 14px 16px;
+    border-top: 2px solid var(--accent);
+  }
+  .gs-val {
+    font-family: 'Bebas Neue', sans-serif; font-size: 34px;
+    color: var(--accent); line-height: 1;
+  }
+  .gs-val.red   { color: var(--error); }
+  .gs-val.green { color: var(--success); }
+  .gs-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted); margin-top: 4px;
+  }
+
+  /* ── NUEVO: Tabla de líderes ── */
+  .lt-wrap {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden; margin-bottom: 28px;
+  }
+  .lt-head {
+    display: grid; grid-template-columns: 1fr 90px 90px 90px;
+    padding: 9px 14px; background: var(--surface3); gap: 8px;
+  }
+  .lt-head span {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .lt-head span:not(:first-child) { text-align: center; }
+  .lt-row {
+    display: grid; grid-template-columns: 1fr 90px 90px 90px;
+    padding: 11px 14px; gap: 8px; align-items: center;
+    border-top: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+  .lt-row:hover { background: var(--surface2); }
+  .lt-nombre { font-size: 13px; font-weight: 600; color: var(--text); }
+  .lt-nombre small { display: block; font-size: 11px; font-weight: 400; color: var(--muted); margin-top: 1px; }
+  .lt-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+    text-align: center; color: var(--text);
+  }
+  .lt-num.warn { color: var(--warning); }
+  .lt-num.red  { color: var(--error); }
+  .lt-pct-bar { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .lt-pct-txt { font-size: 12px; color: var(--accent); font-weight: 600; }
+  .lt-bar-track {
+    width: 100%; height: 4px; background: var(--surface3);
+    border-radius: 2px; overflow: hidden;
+  }
+  .lt-bar-fill {
+    height: 100%; border-radius: 2px;
+    background: linear-gradient(90deg, var(--success), var(--accent));
+  }
+  .lt-bar-fill.warn { background: linear-gradient(90deg, var(--warning), var(--error)); }
+
+  /* ── NUEVO: Sección de duplicados por líder (imprimible) ── */
+  .print-btn {
+    background: rgba(232,200,74,0.1); border: 1px solid var(--accent);
+    color: var(--accent); font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px; letter-spacing: 2px; padding: 8px 20px;
+    border-radius: 3px; cursor: pointer; margin-bottom: 20px;
+    transition: all 0.15s;
+  }
+  .print-btn:hover { background: var(--accent); color: var(--bg); }
+
+  .lider-dup-block {
+    margin-bottom: 20px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden;
+  }
+  .ldb-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px; background: var(--surface3);
+    border-bottom: 1px solid var(--border); gap: 12px; flex-wrap: wrap;
+  }
+  .ldb-name {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+    letter-spacing: 1px; color: var(--accent);
+  }
+  .ldb-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .ldb-chip {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+    padding: 3px 10px; border-radius: 2px;
+  }
+  .ldb-chip.total  { background: rgba(56,189,248,0.12); color: var(--info); border: 1px solid rgba(56,189,248,0.25); }
+  .ldb-chip.rep    { background: rgba(245,158,11,0.12); color: var(--warning); border: 1px solid rgba(245,158,11,0.25); }
+  .ldb-chip.dist   { background: rgba(239,68,68,0.12); color: var(--error); border: 1px solid rgba(239,68,68,0.25); }
+
+  /* tabla dentro del bloque */
+  .ldb-table { width: 100%; border-collapse: collapse; }
+  .ldb-table th {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted);
+    padding: 7px 14px; text-align: left;
+    background: rgba(0,0,0,0.2); border-bottom: 1px solid var(--border);
+  }
+  .ldb-table td {
+    font-size: 13px; padding: 9px 14px;
+    border-bottom: 1px solid rgba(30,45,71,0.5);
+    vertical-align: top; color: var(--text);
+  }
+  .ldb-table tr:last-child td { border-bottom: none; }
+  .ldb-table tr:hover td { background: rgba(232,200,74,0.03); }
+  .td-ced {
+    font-family: 'Bebas Neue', sans-serif; font-size: 16px;
+    color: var(--text); white-space: nowrap;
+  }
+  .td-nombre { font-weight: 600; }
+  .td-otros { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .td-otros strong { color: var(--text); font-weight: 600; }
+  .name-diff {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.5px; padding: 1px 6px; border-radius: 2px;
+    background: rgba(239,68,68,0.15); color: var(--error);
+    margin-left: 4px; vertical-align: middle;
+  }
+  .name-ok {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.5px; padding: 1px 6px; border-radius: 2px;
+    background: rgba(16,185,129,0.12); color: var(--success);
+    margin-left: 4px; vertical-align: middle;
+  }
+
   @media (max-width: 600px) {
-    .lugar-grid { grid-template-columns: 1fr; }
-    .kpi-grid { grid-template-columns: 1fr 1fr; }
-    .dup-row { grid-template-columns: 1fr 1fr; }
-    .dup-row .name-match-pill { display: none; }
+    .global-strip { grid-template-columns: 1fr 1fr; }
+    .lt-head { grid-template-columns: 1fr 70px 70px; }
+    .lt-head span:last-child { display: none; }
+    .lt-row { grid-template-columns: 1fr 70px 70px; }
+    .lt-row > div:last-child { display: none; }
     .lider-name { min-width: 100px; font-size: 12px; }
     .stats-panel { max-width: 100%; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff !important; color: #000 !important; padding: 0 !important; }
+    body::before { display: none; }
+    .stats-back, .print-btn, .stats-loading { display: none !important; }
+    .stats-panel { max-width: 100% !important; padding: 0 !important; }
+    .stats-header { background: #0d2818 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .lider-dup-block { break-inside: avoid; page-break-inside: avoid; }
+    .lt-wrap, .global-strip { break-inside: avoid; }
+    .ldb-table td, .ldb-table th { border-color: #ccc !important; }
+    .ldb-header { background: #1a4a2e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    :root {
+      --surface: #f9f9f9; --surface2: #f0f0f0; --surface3: #e8e8e8;
+      --border: #ddd; --text: #111; --muted: #555;
+      --accent: #1a4a2e; --warning: #b45309; --error: #b91c1c;
+      --success: #15803d; --info: #0369a1;
+    }
   }
 </style>
 </head>
@@ -510,28 +660,31 @@
 
   <div class="stats-header">
     <div class="badge">Análisis de Base de Datos</div>
-    <div class="stats-title">PANEL DE<br><span>ESTADÍSTICAS</span></div>
+    <div class="stats-title">CÉDULAS<br><span>DUPLICADAS</span></div>
     <div class="stats-subtitle" id="statsTimestamp">—</div>
   </div>
 
-  <!-- KPIs -->
-  <div class="kpi-grid" id="kpiGrid"></div>
+  <!-- Resumen global -->
+  <div class="global-strip" id="globalStrip"></div>
 
-  <!-- Top líderes -->
-  <div class="sec-title">LÍDERES <span>TOP</span></div>
-  <div id="topLideres" style="margin-bottom:28px;"></div>
+  <!-- Tabla resumen líderes -->
+  <div class="sec-title">RESUMEN <span>POR LÍDER</span></div>
+  <div class="lt-wrap">
+    <div class="lt-head">
+      <span>Líder</span>
+      <span>Total reg.</span>
+      <span>Duplicados</span>
+      <span>% duplicado</span>
+    </div>
+    <div id="liderTable"></div>
+  </div>
 
-  <!-- Bottom líderes -->
-  <div class="sec-title">LÍDERES CON <span>MENOS REGISTROS</span></div>
-  <div id="bottomLideres" style="margin-bottom:28px;"></div>
+  <!-- Botón imprimir -->
+  <button class="print-btn" onclick="window.print()">🖨 IMPRIMIR / GUARDAR PDF</button>
 
-  <!-- Duplicados -->
-  <div class="sec-title">CÉDULAS <span>DUPLICADAS</span></div>
-  <div id="dupSection" style="margin-bottom:28px;"></div>
-
-  <!-- Lugares -->
-  <div class="sec-title">DISTRIBUCIÓN POR <span>LUGAR</span></div>
-  <div class="lugar-grid" id="lugarGrid"></div>
+  <!-- Detalle duplicados por líder -->
+  <div class="sec-title">DETALLE DE DUPLICADOS <span>POR LÍDER</span></div>
+  <div id="dupDetalle"></div>
 </div>
 
 <script>
@@ -677,19 +830,13 @@ async function cargarStats() {
 function renderStats(data) {
   document.getElementById('statsLoading').classList.remove('visible');
 
-  /* El backend debe devolver:
-     {
-       total: number,
-       totalUnicos: number,
-       totalLideres: number,
-       totalLugares: number,
-       cedulasDuplicadas: number,
-       lideres: [ { nombre, count } ],          // todos, ordenado desc
-       lugares: [ { nombre, count } ],           // todos
-       duplicados: [
-         { cedula, registros: [ { lider, nombre, puesto, lugar } ] }
-       ]
-     }
+  /*
+    Backend devuelve:
+    {
+      total, totalUnicos, totalLideres, totalLugares,
+      lideres: [ { nombre, count } ],
+      duplicados: [ { cedula, registros: [ { lider, nombre, puesto, lugar } ] } ]
+    }
   */
 
   const now = new Date();
@@ -697,139 +844,137 @@ function renderStats(data) {
     'Generado el ' + now.toLocaleDateString('es-CO', { day:'2-digit', month:'long', year:'numeric' })
     + ' a las ' + now.toLocaleTimeString('es-CO', { hour:'2-digit', minute:'2-digit' });
 
-  const total      = data.total || 0;
-  const unicos     = data.totalUnicos || 0;
-  const lideres    = data.lideres || [];
-  const lugares    = data.lugares || [];
-  const dups       = data.duplicados || [];
-  const totalLider = data.totalLideres || lideres.length;
-  const totalLugar = data.totalLugares || lugares.length;
+  const total   = data.total || 0;
+  const unicos  = data.totalUnicos || 0;
+  const lideres = data.lideres || [];
+  const dups    = data.duplicados || [];
 
-  /* ─── KPIs ─── */
-  const kpis = [
-    { icon: '🗂️', val: total.toLocaleString('es-CO'), label: 'Total Registros', cls: 'blue' },
-    { icon: '🪪', val: unicos.toLocaleString('es-CO'), label: 'Cédulas Únicas', cls: 'green' },
-    { icon: '👥', val: totalLider, label: 'Líderes', cls: 'yellow' },
-    { icon: '📍', val: totalLugar, label: 'Lugares de Votación', cls: 'purple' },
-    { icon: '⚠️', val: dups.length, label: 'Cédulas Duplicadas', cls: 'orange' },
-    { icon: '📊', val: total > 0 ? (total / Math.max(totalLider,1)).toFixed(1) : '0', label: 'Promedio / Líder', cls: 'red' },
-  ];
-  const kpiGrid = document.getElementById('kpiGrid');
-  kpiGrid.innerHTML = kpis.map(k => `
-    <div class="kpi-card ${k.cls}">
-      <div class="kpi-icon">${k.icon}</div>
-      <div class="kpi-val">${k.val}</div>
-      <div class="kpi-label">${k.label}</div>
-    </div>
-  `).join('');
+  // ── Índice: total registros por líder ──
+  const totalPorLider = {};
+  lideres.forEach(l => { totalPorLider[l.nombre] = l.count; });
 
-  /* ─── Top Líderes ─── */
-  const maxCount = lideres.length ? lideres[0].count : 1;
-  const top = lideres.slice(0, 15);
-  document.getElementById('topLideres').innerHTML = top.map((l, i) => {
-    const pct = Math.round((l.count / total) * 100);
-    const barW = Math.max(4, Math.round((l.count / maxCount) * 100));
-    return `
-      <div class="lider-bar-row">
-        <div class="lider-rank">${i + 1}</div>
-        <div class="lider-name">${l.nombre}</div>
-        <div class="lider-bar-wrap">
-          <div class="lider-bar" style="width:${barW}%">
-            <span class="lider-bar-val">${l.count}</span>
-          </div>
-        </div>
-        <div class="lider-pct">${pct}%</div>
-      </div>`;
-  }).join('');
+  // ── Índice: duplicados por líder ──
+  const dupsPorLider = {};
+  lideres.forEach(l => { dupsPorLider[l.nombre] = []; });
+  dups.forEach(d => {
+    const lidersEnCed = [...new Set(d.registros.map(r => r.lider))];
+    d.registros.forEach(r => {
+      const ml = r.lider;
+      if (!dupsPorLider[ml]) dupsPorLider[ml] = [];
+      // Evitar duplicar la misma cédula para el mismo líder
+      if (!dupsPorLider[ml].find(x => x.cedula === d.cedula)) {
+        dupsPorLider[ml].push({
+          cedula: d.cedula,
+          mi_nombre: r.nombre,
+          otros: d.registros
+            .filter(x => x.lider !== ml)
+            .map(x => ({ lider: x.lider, nombre: x.nombre }))
+        });
+      }
+    });
+  });
 
-  /* ─── Bottom Líderes ─── */
-  const bottom = [...lideres].sort((a,b) => a.count - b.count).slice(0, 10);
-  const minCount = bottom.length ? bottom[0].count : 1;
-  document.getElementById('bottomLideres').innerHTML = bottom.map((l, i) => {
-    const pct = Math.round((l.count / total) * 100);
-    const barW = Math.max(4, Math.round((l.count / maxCount) * 100));
-    return `
-      <div class="bottom-lider-row">
-        <div class="lider-rank">${i + 1}</div>
-        <div class="lider-name">${l.nombre}</div>
-        <div class="bottom-bar-wrap">
-          <div class="bottom-bar" style="width:${barW}%">
-            <span class="bottom-bar-val">${l.count}</span>
-          </div>
-        </div>
-        <div class="lider-pct">${pct}%</div>
-      </div>`;
-  }).join('');
-
-  /* ─── Duplicados ─── */
-  const dupSection = document.getElementById('dupSection');
-  if (!dups.length) {
-    dupSection.innerHTML = `<div style="color:var(--success);font-size:14px;padding:20px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.2);border-radius:3px;text-align:center;">
-      ✅ No se encontraron cédulas duplicadas en la base de datos.
-    </div>`;
-  } else {
-    dupSection.innerHTML = dups.map(d => {
-      const nombres = d.registros.map(r => (r.nombre || '').trim().toUpperCase());
-      const allNombresMatch = nombres.every(n => n === nombres[0]);
-      const rows = d.registros.map(r => {
-        const nameMatch = (r.nombre || '').trim().toUpperCase() === nombres[0];
-        return `
-          <div class="dup-row">
-            <div class="dup-row-lider">👤 ${r.lider || 'Sin líder'}</div>
-            <div class="dup-row-nombre">${r.nombre || '—'}</div>
-            <div>
-              <span class="name-match-pill ${nameMatch ? 'yes' : 'no'}">
-                ${nameMatch ? 'Nombre ✓' : 'Diferente'}
-              </span>
-            </div>
-          </div>`;
-      }).join('');
-
-      return `
-        <div class="dup-table-card">
-          <div class="dup-table-header" onclick="toggleDup(this)">
-            <div>
-              <div class="dup-table-cedula-num">
-                CC ${d.cedula}
-                <span class="dup-consistency-badge ${allNombresMatch ? 'ok' : 'bad'}">
-                  ${allNombresMatch ? 'Nombres coinciden' : 'Nombres distintos'}
-                </span>
-              </div>
-              <div class="dup-table-meta">${d.registros.length} registros · Líderes: ${d.registros.map(r => r.lider || 'Sin líder').join(', ')}</div>
-            </div>
-            <div class="dup-table-toggle">▾</div>
-          </div>
-          <div class="dup-table-body">
-            ${rows}
-          </div>
-        </div>`;
-    }).join('');
+  // ── Similitud de nombres ──
+  function simNombre(a, b) {
+    const ta = new Set((a||'').toUpperCase().split(/\s+/).filter(Boolean));
+    const tb = new Set((b||'').toUpperCase().split(/\s+/).filter(Boolean));
+    if (!ta.size || !tb.size) return false;
+    let n = 0; ta.forEach(t => { if (tb.has(t)) n++; });
+    return (n / (ta.size + tb.size - n)) >= 0.5;
   }
 
-  /* ─── Lugares ─── */
-  const lugarGrid = document.getElementById('lugarGrid');
-  lugarGrid.innerHTML = lugares.map(l => {
-    const pct = total > 0 ? Math.round((l.count / total) * 100) : 0;
+  // ── Resumen global ──
+  const totalDupCeds = dups.length;
+  document.getElementById('globalStrip').innerHTML = [
+    { v: total.toLocaleString('es-CO'), l: 'Total registros', cls: '' },
+    { v: unicos.toLocaleString('es-CO'), l: 'Cédulas únicas', cls: 'green' },
+    { v: totalDupCeds, l: 'Cédulas duplicadas', cls: 'red' },
+    { v: lideres.length, l: 'Líderes activos', cls: '' },
+  ].map(k => `
+    <div class="gs-card">
+      <div class="gs-val ${k.cls}">${k.v}</div>
+      <div class="gs-label">${k.l}</div>
+    </div>`).join('');
+
+  // ── Tabla resumen por líder ──
+  const lideresOrdenados = [...lideres].sort((a,b) => b.count - a.count);
+  document.getElementById('liderTable').innerHTML = lideresOrdenados.map(l => {
+    const nDups = (dupsPorLider[l.nombre] || []).length;
+    const pctDup = l.count > 0 ? ((nDups / l.count) * 100).toFixed(1) : 0;
+    const barW = Math.min(100, parseFloat(pctDup));
+    const warn = barW > 15;
     return `
-      <div class="lugar-card">
-        <div class="lugar-count">${l.count}</div>
+      <div class="lt-row">
         <div>
-          <div class="lugar-name">${l.nombre}</div>
-          <div class="lugar-pct">${pct}% del total</div>
+          <div class="lt-nombre">${l.nombre}</div>
+          <div class="lt-nombre"><small>${nDups} de ${l.count} registros repetidos</small></div>
+        </div>
+        <div class="lt-num">${l.count}</div>
+        <div class="lt-num ${warn ? 'warn' : ''}">${nDups}</div>
+        <div class="lt-pct-bar">
+          <div class="lt-pct-txt">${pctDup}%</div>
+          <div class="lt-bar-track">
+            <div class="lt-bar-fill ${warn ? 'warn' : ''}" style="width:${barW}%"></div>
+          </div>
         </div>
       </div>`;
   }).join('');
+
+  // ── Detalle duplicados por líder ──
+  const detalle = document.getElementById('dupDetalle');
+  const bloques = lideresOrdenados.map(l => {
+    const items = dupsPorLider[l.nombre] || [];
+    if (!items.length) return '';
+
+    const distintos = items.filter(i =>
+      i.otros.some(o => !simNombre(i.mi_nombre, o.nombre))
+    ).length;
+
+    const filas = items.map(item => {
+      const otrosHtml = item.otros.map(o => {
+        const igual = simNombre(item.mi_nombre, o.nombre);
+        return `<strong>${o.lider}</strong>: ${o.nombre || '—'} `
+          + (igual
+            ? `<span class="name-ok">✓ igual</span>`
+            : `<span class="name-diff">✗ distinto</span>`);
+      }).join('<br>');
+
+      return `<tr>
+        <td><div class="td-ced">${item.cedula}</div></td>
+        <td><div class="td-nombre">${item.mi_nombre || '—'}</div></td>
+        <td><div class="td-otros">${otrosHtml}</div></td>
+      </tr>`;
+    }).join('');
+
+    return `
+      <div class="lider-dup-block">
+        <div class="ldb-header">
+          <div class="ldb-name">${l.nombre}</div>
+          <div class="ldb-chips">
+            <span class="ldb-chip total">Total: ${l.count}</span>
+            <span class="ldb-chip rep">Duplicados: ${items.length}</span>
+            ${distintos > 0 ? `<span class="ldb-chip dist">Nombre distinto: ${distintos}</span>` : ''}
+          </div>
+        </div>
+        <table class="ldb-table">
+          <thead>
+            <tr>
+              <th style="width:120px">Cédula</th>
+              <th>Nombre en este líder</th>
+              <th>Compartido con</th>
+            </tr>
+          </thead>
+          <tbody>${filas}</tbody>
+        </table>
+      </div>`;
+  }).join('');
+
+  detalle.innerHTML = bloques || `<div style="color:var(--success);padding:20px;text-align:center;">✅ Sin duplicados.</div>`;
 
   document.getElementById('statsPanel').classList.add('visible');
 }
 
-function toggleDup(header) {
-  const body   = header.nextElementSibling;
-  const toggle = header.querySelector('.dup-table-toggle');
-  const isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  toggle.classList.toggle('open', !isOpen);
-}
+
 
 /* ─── Enter key ─── */
 document.getElementById('cedula').addEventListener('keydown', e => {
