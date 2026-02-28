@@ -138,6 +138,48 @@
   button:active { transform: scale(0.97); }
   button:disabled { background: var(--muted); cursor: not-allowed; transform: none; }
 
+  /* ─── STATS BUTTON ─── */
+  .stats-btn-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+  }
+  .btn-stats {
+    background: transparent;
+    border: 1px solid rgba(232,200,74,0.35);
+    color: var(--accent);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px; letter-spacing: 2px;
+    padding: 11px 28px; border-radius: 3px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
+    transition: background 0.15s, border-color 0.2s, transform 0.1s;
+    width: 100%;
+    justify-content: center;
+  }
+  .btn-stats:hover {
+    background: rgba(232,200,74,0.08);
+    border-color: var(--accent);
+    transform: none;
+  }
+  .btn-stats:active { transform: scale(0.97); }
+  .btn-stats-icon {
+    font-size: 18px;
+  }
+  .btn-stats-divider {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 16px; margin-bottom: 0;
+  }
+  .btn-stats-divider::before,
+  .btn-stats-divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--border);
+  }
+  .btn-stats-divider span {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted);
+  }
+
   /* ─── STATUS ─── */
   .status-msg {
     text-align: center; font-size: 13px;
@@ -396,39 +438,6 @@
   .dup-consistency-badge.ok  { background: rgba(16,185,129,0.1); color: var(--success); border: 1px solid rgba(16,185,129,0.25); }
   .dup-consistency-badge.bad { background: rgba(239,68,68,0.1); color: var(--error); border: 1px solid rgba(239,68,68,0.25); }
 
-  /* Lugares */
-  .lugar-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px;
-  }
-  .lugar-card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 3px;
-    padding: 14px 16px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .lugar-count {
-    font-family: 'Bebas Neue', sans-serif; font-size: 28px;
-    color: var(--accent); flex-shrink: 0; min-width: 50px;
-  }
-  .lugar-name { font-size: 13px; font-weight: 500; line-height: 1.3; }
-  .lugar-pct  { font-size: 11px; color: var(--muted); }
-
-  /* Loading overlay for stats */
-  .stats-loading {
-    display: none; text-align: center; padding: 60px 20px;
-    position: relative; z-index: 1;
-  }
-  .stats-loading.visible { display: block; }
-  .stats-loading-spinner {
-    width: 40px; height: 40px; margin: 0 auto 16px;
-    border: 3px solid rgba(232,200,74,0.2);
-    border-top-color: var(--accent);
-    border-radius: 50%; animation: spin 0.8s linear infinite;
-  }
-  .stats-loading-text {
-    font-family: 'Bebas Neue', sans-serif; font-size: 20px;
-    letter-spacing: 2px; color: var(--muted);
-  }
-
   /* ── NUEVO: Resumen global ── */
   .global-strip {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
@@ -559,6 +568,77 @@
     margin-left: 4px; vertical-align: middle;
   }
 
+  /* ══════════════════════════════════════════
+     TABLA SITIOS DE VOTACIÓN
+  ══════════════════════════════════════════ */
+  .lugares-wrap {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden; margin-bottom: 28px;
+  }
+  .lugares-head {
+    display: grid; grid-template-columns: 36px 1fr 80px 80px 100px;
+    padding: 9px 14px; background: var(--surface3); gap: 8px;
+    align-items: center;
+  }
+  .lugares-head span {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .lugares-head span:not(:nth-child(2)) { text-align: center; }
+  .lugar-row {
+    display: grid; grid-template-columns: 36px 1fr 80px 80px 100px;
+    padding: 12px 14px; gap: 8px; align-items: center;
+    border-top: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+  .lugar-row:hover { background: var(--surface2); }
+  .lugar-rank-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+    color: var(--muted); text-align: center;
+  }
+  .lugar-rank-num.top { color: var(--accent); }
+  .lugar-nombre-cell { font-size: 13px; font-weight: 500; line-height: 1.3; }
+  .lugar-nombre-cell small { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .lugar-count-cell {
+    font-family: 'Bebas Neue', sans-serif; font-size: 24px;
+    text-align: center; color: var(--text);
+  }
+  .lugar-mesas-cell {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+    text-align: center; color: var(--info);
+  }
+  .lugar-bar-cell { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .lugar-pct-txt { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .lugar-bar-track {
+    width: 100%; height: 6px; background: var(--surface3);
+    border-radius: 3px; overflow: hidden;
+  }
+  .lugar-bar-fill {
+    height: 100%; border-radius: 3px;
+    background: linear-gradient(90deg, var(--info), var(--purple));
+    transition: width 0.8s cubic-bezier(.2,.8,.3,1);
+  }
+  .lugar-bar-fill.top3 {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  /* Loading overlay for stats */
+  .stats-loading {
+    display: none; text-align: center; padding: 60px 20px;
+    position: relative; z-index: 1;
+  }
+  .stats-loading.visible { display: block; }
+  .stats-loading-spinner {
+    width: 40px; height: 40px; margin: 0 auto 16px;
+    border: 3px solid rgba(232,200,74,0.2);
+    border-top-color: var(--accent);
+    border-radius: 50%; animation: spin 0.8s linear infinite;
+  }
+  .stats-loading-text {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+    letter-spacing: 2px; color: var(--muted);
+  }
+
   @media (max-width: 600px) {
     .global-strip { grid-template-columns: 1fr 1fr; }
     .lt-head { grid-template-columns: 1fr 70px 70px; }
@@ -567,6 +647,10 @@
     .lt-row > div:last-child { display: none; }
     .lider-name { min-width: 100px; font-size: 12px; }
     .stats-panel { max-width: 100%; }
+    .lugares-head { grid-template-columns: 28px 1fr 60px 60px; }
+    .lugares-head span:last-child { display: none; }
+    .lugar-row { grid-template-columns: 28px 1fr 60px 60px; }
+    .lugar-row > div:last-child { display: none; }
   }
 
   /* ── PRINT ── */
@@ -577,7 +661,7 @@
     .stats-panel { max-width: 100% !important; padding: 0 !important; }
     .stats-header { background: #0d2818 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .lider-dup-block { break-inside: avoid; page-break-inside: avoid; }
-    .lt-wrap, .global-strip { break-inside: avoid; }
+    .lt-wrap, .global-strip, .lugares-wrap { break-inside: avoid; }
     .ldb-table td, .ldb-table th { border-color: #ccc !important; }
     .ldb-header { background: #1a4a2e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .ldb-name { color: #ffffff !important; }
@@ -598,15 +682,29 @@
   <div class="header">
     <div class="badge">Sistema Electoral</div>
     <h1>CONSULTA<br><span>VOTANTE</span></h1>
-    <p class="subtitle">Ingresa tu cédula — escribe <strong style="color:var(--accent)">stats</strong> para ver estadísticas</p>
+    <p class="subtitle">Ingresa tu número de cédula para consultar tu información electoral</p>
   </div>
 
   <div class="search-card">
     <label for="cedula">Número de cédula</label>
     <div class="input-row">
-      <input type="text" id="cedula" placeholder="Ej: 1082405787 o stats" maxlength="20" inputmode="numeric" />
+      <input type="text" id="cedula" placeholder="Ej: 1082405787" maxlength="20" inputmode="numeric" />
       <button id="btnBuscar" onclick="buscar()">BUSCAR</button>
     </div>
+
+    <!-- Divisor -->
+    <div class="btn-stats-divider">
+      <span>O</span>
+    </div>
+
+    <!-- Botón de estadísticas -->
+    <div class="stats-btn-row">
+      <button class="btn-stats" onclick="cargarStats()">
+        <span class="btn-stats-icon">📊</span>
+        VER ESTADÍSTICAS Y ANÁLISIS
+      </button>
+    </div>
+
     <div class="status-msg" id="statusMsg"></div>
   </div>
 
@@ -681,6 +779,19 @@
     <div id="liderTable"></div>
   </div>
 
+  <!-- Sitios de votación más concurridos -->
+  <div class="sec-title">SITIOS DE VOTACIÓN <span>MÁS CONCURRIDOS</span></div>
+  <div class="lugares-wrap">
+    <div class="lugares-head">
+      <span>#</span>
+      <span>Lugar de Votación</span>
+      <span>Votantes</span>
+      <span>Mesas</span>
+      <span>% del total</span>
+    </div>
+    <div id="lugaresTable"></div>
+  </div>
+
   <!-- Botón imprimir -->
   <button class="print-btn" onclick="window.print()">🖨 IMPRIMIR / GUARDAR PDF</button>
 
@@ -726,13 +837,6 @@ function volverBusqueda() {
 ═══════════════════════════════════════════════════════ */
 async function buscar() {
   const raw = document.getElementById('cedula').value.trim();
-
-  // ── Comando stats ──
-  if (raw.toLowerCase() === 'stats') {
-    cargarStats();
-    return;
-  }
-
   const cedula = raw;
   if (!cedula) { showStatus('Por favor ingresa un número de cédula.', 'error'); return; }
 
@@ -822,7 +926,6 @@ async function cargarStats() {
     const data = await res.json();
     renderStats(data);
   } catch {
-    // Si el backend no soporta ?action=stats, muestra error elegante
     document.getElementById('statsLoading').classList.remove('visible');
     document.getElementById('searchPanel').style.display = 'flex';
     showStatus('⚠️ El servidor no soporta estadísticas o hubo un error de conexión.', 'error');
@@ -831,15 +934,6 @@ async function cargarStats() {
 
 function renderStats(data) {
   document.getElementById('statsLoading').classList.remove('visible');
-
-  /*
-    Backend devuelve:
-    {
-      total, totalUnicos, totalLideres, totalLugares,
-      lideres: [ { nombre, count } ],
-      duplicados: [ { cedula, registros: [ { lider, nombre, puesto, lugar } ] } ]
-    }
-  */
 
   const now = new Date();
   document.getElementById('statsTimestamp').textContent =
@@ -859,11 +953,9 @@ function renderStats(data) {
   const dupsPorLider = {};
   lideres.forEach(l => { dupsPorLider[l.nombre] = []; });
   dups.forEach(d => {
-    const lidersEnCed = [...new Set(d.registros.map(r => r.lider))];
     d.registros.forEach(r => {
       const ml = r.lider;
       if (!dupsPorLider[ml]) dupsPorLider[ml] = [];
-      // Evitar duplicar la misma cédula para el mismo líder
       if (!dupsPorLider[ml].find(x => x.cedula === d.cedula)) {
         dupsPorLider[ml].push({
           cedula: d.cedula,
@@ -922,6 +1014,80 @@ function renderStats(data) {
       </div>`;
   }).join('');
 
+  // ══════════════════════════════════════════
+  // ── SITIOS DE VOTACIÓN MÁS CONCURRIDOS ──
+  // ══════════════════════════════════════════
+  // Construir mapa de lugares a partir de todos los registros
+  // El backend puede enviar data.lugares (array de {nombre, count, mesas})
+  // o se calcula desde data.lideres/registros si hay campo 'lugar'
+  const lugarMap = {};
+
+  // Intentar usar data.lugares si viene del backend
+  if (Array.isArray(data.lugares) && data.lugares.length) {
+    data.lugares.forEach(l => {
+      const key = (l.nombre || l.lugar || '').trim();
+      if (!key) return;
+      lugarMap[key] = lugarMap[key] || { count: 0, mesas: new Set() };
+      lugarMap[key].count += (l.count || 1);
+      if (l.puesto || l.mesa) lugarMap[key].mesas.add(l.puesto || l.mesa);
+    });
+  }
+
+  // Fallback: calcular desde duplicados si tienen campo lugar
+  if (Object.keys(lugarMap).length === 0) {
+    dups.forEach(d => {
+      d.registros.forEach(r => {
+        const key = (r.lugar || '').trim();
+        if (!key) return;
+        lugarMap[key] = lugarMap[key] || { count: 0, mesas: new Set() };
+        lugarMap[key].count += 1;
+        if (r.puesto) lugarMap[key].mesas.add(r.puesto);
+      });
+    });
+  }
+
+  // Construir array ordenado
+  const lugaresArr = Object.entries(lugarMap)
+    .map(([nombre, info]) => ({
+      nombre,
+      count: info.count,
+      mesas: info.mesas.size
+    }))
+    .sort((a, b) => b.count - a.count);
+
+  const topLugares = lugaresArr.slice(0, 15); // Top 15
+  const maxLugarCount = topLugares.length > 0 ? topLugares[0].count : 1;
+
+  if (topLugares.length === 0) {
+    document.getElementById('lugaresTable').innerHTML = `
+      <div style="padding: 24px; text-align:center; color: var(--muted); font-size: 13px;">
+        ℹ️ No hay información de sitios de votación disponible en los datos recibidos.
+      </div>`;
+  } else {
+    document.getElementById('lugaresTable').innerHTML = topLugares.map((l, i) => {
+      const rank = i + 1;
+      const pct = total > 0 ? ((l.count / total) * 100).toFixed(1) : 0;
+      const barW = ((l.count / maxLugarCount) * 100).toFixed(1);
+      const isTop3 = rank <= 3;
+      return `
+        <div class="lugar-row">
+          <div class="lugar-rank-num ${isTop3 ? 'top' : ''}">${rank}</div>
+          <div class="lugar-nombre-cell">
+            ${l.nombre}
+            ${isTop3 ? `<small>${rank === 1 ? '🥇 Mayor afluencia' : rank === 2 ? '🥈 Segunda mayor' : '🥉 Tercera mayor'}</small>` : ''}
+          </div>
+          <div class="lugar-count-cell">${l.count.toLocaleString('es-CO')}</div>
+          <div class="lugar-mesas-cell">${l.mesas > 0 ? l.mesas : '—'}</div>
+          <div class="lugar-bar-cell">
+            <div class="lugar-pct-txt">${pct}%</div>
+            <div class="lugar-bar-track">
+              <div class="lugar-bar-fill ${isTop3 ? 'top3' : ''}" style="width:${barW}%"></div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
   // ── Detalle duplicados por líder ──
   const detalle = document.getElementById('dupDetalle');
   const bloques = lideresOrdenados.map(l => {
@@ -975,8 +1141,6 @@ function renderStats(data) {
 
   document.getElementById('statsPanel').classList.add('visible');
 }
-
-
 
 /* ─── Enter key ─── */
 document.getElementById('cedula').addEventListener('keydown', e => {
